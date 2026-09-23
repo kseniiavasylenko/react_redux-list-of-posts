@@ -13,7 +13,7 @@ export const UserSelector: React.FC<Props> = ({
   onSelectUser,
 }) => {
   // Берем пользователей из Redux вместо useContext(UserContext)
-  const users = useAppSelector((state) => state.users.items);
+  const users = useAppSelector(state => state.users.items);
 
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -45,7 +45,7 @@ export const UserSelector: React.FC<Props> = ({
         <button
           type="button"
           className="button"
-          onClick={() => setIsOpen((prev) => !prev)}
+          onClick={() => setIsOpen(prev => !prev)}
         >
           <span>{currentUser?.name || 'Choose a user'}</span>
           <span className="icon is-small">
@@ -56,7 +56,7 @@ export const UserSelector: React.FC<Props> = ({
 
       <div className="dropdown-menu" role="menu">
         <div className="dropdown-content">
-          {users.map((user) => (
+          {users.map(user => (
             <a
               key={user.id}
               href={`#user-${user.id}`}

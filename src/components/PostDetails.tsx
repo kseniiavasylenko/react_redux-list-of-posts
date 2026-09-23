@@ -7,9 +7,13 @@ import * as commentsApi from '../api/comments';
 import { Post } from '../types/Post';
 import { CommentData } from '../types/Comment';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setError, setLoading } from '../redux/commentsSlice';
-import { deleteCommentAction, setComments } from '../redux/commentsSlice';
-import { addCommentAction } from '../redux/commentsSlice';
+import {
+  setError,
+  setLoading,
+  setComments,
+  addCommentAction,
+  deleteCommentAction,
+} from '../redux/commentsSlice';
 
 type Props = {
   post: Post;
@@ -17,7 +21,8 @@ type Props = {
 
 export const PostDetails: React.FC<Props> = ({ post }) => {
   const dispatch = useAppDispatch();
-  const { comments, loaded, hasError } = useAppSelector(
+  // Обратите внимание: берем items и переименовываем в comments для удобства
+  const { items: comments, loaded, hasError } = useAppSelector(
     state => state.comments,
   );
 
@@ -53,6 +58,7 @@ export const PostDetails: React.FC<Props> = ({ post }) => {
       });
 
       dispatch(addCommentAction(newComment));
+      setVisible(false);
     } catch (error) {
       dispatch(setError());
     } finally {

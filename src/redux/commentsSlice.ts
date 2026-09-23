@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Comment } from '../types/Comment';
 
 export interface CommentsState {
-  comments: Comment[];
+  items: Comment[];
   loaded: boolean;
   hasError: boolean;
 }
 
 const initialState: CommentsState = {
-  comments: [],
+  items: [],
   loaded: false,
   hasError: false,
 };
@@ -24,7 +24,7 @@ export const commentsSlice = createSlice({
     },
 
     setComments: (state, action: PayloadAction<Comment[]>) => {
-      state.comments = action.payload;
+      state.items = action.payload;
       state.hasError = false;
       state.loaded = true;
     },
@@ -35,17 +35,17 @@ export const commentsSlice = createSlice({
     },
 
     clearComments: state => {
-      state.comments = [];
+      state.items = [];
       state.hasError = false;
       state.loaded = false;
     },
 
     addCommentAction: (state, action: PayloadAction<Comment>) => {
-      state.comments.push(action.payload);
+      state.items.push(action.payload);
     },
 
     deleteCommentAction: (state, action: PayloadAction<number>) => {
-      state.comments = state.comments.filter(
+      state.items = state.items.filter(
         comment => comment.id !== action.payload,
       );
     },
@@ -60,4 +60,5 @@ export const {
   setLoading,
   clearComments,
 } = commentsSlice.actions;
+
 export default commentsSlice.reducer;
