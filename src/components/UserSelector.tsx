@@ -12,7 +12,6 @@ export const UserSelector: React.FC<Props> = ({
   currentUser,
   onSelectUser,
 }) => {
-  // Берем пользователей из Redux вместо useContext(UserContext)
   const users = useAppSelector(state => state.users.items);
 
   const [isOpen, setIsOpen] = useState(false);

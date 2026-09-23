@@ -21,10 +21,11 @@ type Props = {
 
 export const PostDetails: React.FC<Props> = ({ post }) => {
   const dispatch = useAppDispatch();
-  // Обратите внимание: берем items и переименовываем в comments для удобства
-  const { items: comments, loaded, hasError } = useAppSelector(
-    state => state.comments,
-  );
+  const {
+    items: comments,
+    loaded,
+    hasError,
+  } = useAppSelector(state => state.comments);
 
   const [visible, setVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -58,7 +59,6 @@ export const PostDetails: React.FC<Props> = ({ post }) => {
       });
 
       dispatch(addCommentAction(newComment));
-      setVisible(false);
     } catch (error) {
       dispatch(setError());
     } finally {
